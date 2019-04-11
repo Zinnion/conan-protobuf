@@ -10,14 +10,14 @@ from conans.errors import ConanInvalidConfiguration
 class ProtobufConan(ConanFile):
     name = "protobuf"
     version = "3.7.1"
-    url = "https://github.com/maurodelazeri/conan-protobuf"
+    url = "https://github.com/zinnion/conan-protobuf"
     homepage = "https://github.com/protocolbuffers/protobuf"
     topics = ("conan", "protobuf", "protocol-buffers", "protocol-compiler", "serialization", "rpc")
     author = "Zinnion <mauro@zinnion.com>"
     description = "Protocol Buffers - Google's data interchange format"
     license = "BSD-3-Clause"
     exports = ["LICENSE.md"]
-    exports_sources = ["CMakeLists.txt", "protobuf.patch"]
+    exports_sources = ["CMakeLists.txt"]
     generators = "cmake"
     settings = "os", "arch", "compiler", "build_type"
     short_paths = True
@@ -65,7 +65,6 @@ class ProtobufConan(ConanFile):
         return cmake
 
     def build(self):
-        tools.patch(base_path=self._source_subfolder, patch_file="protobuf.patch")
         cmake = self._configure_cmake()
         cmake.build()
 

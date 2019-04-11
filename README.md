@@ -1,9 +1,14 @@
 ## Package Status
 
-## Conan.io Information
+## protobuf / proto v3
 
 Zinnion packages can be found in the following public Conan repository:
 
-[Zinnion Public Conan Repository on Bintray](https://bintray.com/maurodelazeri/public-conan)
+[Zinnion Public Conan Repository on Bintray](https://bintray.com/zinnion/cpp/protobuf%3Amaurodelazeri)
 
-*Note: You can click the "Set Me Up" button on the Bintray page above for instructions on using packages from this repository.*
+```
+cd test_package
+protoc addressbook.proto --cpp_out=.
+```
+
+conan create . maurodelazeri/stable --build missing
