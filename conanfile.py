@@ -57,7 +57,8 @@ class ProtobufConan(ConanFile):
         cmake = CMake(self, set_cmake_flags=True)
         cmake.definitions["protobuf_BUILD_TESTS"] = False
         cmake.definitions["protobuf_WITH_ZLIB"] = self.options.with_zlib
-        cmake.definitions["protobuf_BUILD_PROTOC_BINARIES"] = not self.options.lite
+        #cmake.definitions["protobuf_BUILD_PROTOC_BINARIES"] = not self.options.lite
+        cmake.definitions["protobuf_BUILD_PROTOC_BINARIES"] = True
         cmake.definitions["protobuf_BUILD_PROTOBUF_LITE"] = self.options.lite
         if self.settings.compiler == "Visual Studio":
             cmake.definitions["protobuf_MSVC_STATIC_RUNTIME"] = "MT" in self.settings.compiler.runtime
@@ -72,8 +73,16 @@ class ProtobufConan(ConanFile):
         self.copy("LICENSE", dst="licenses", src=self._source_subfolder)
         cmake = self._configure_cmake()
         cmake.install()
+        #cmake_dir = os.path.join(self.package_folder, "cmake") if self.settings.os == "Windows" \
+        #            else os.path.join(self.package_folder, "lib", "cmake", "protoc")
+        #cmake_target = os.path.join(cmake_dir, "protobuf-config-version.cmake")
+        #tools.replace_in_file(cmake_target, "# if the installed", "return() #")
 
     def package_info(self):
+        self.env_info.PATH.append(os.path.join(self.package_folder, "bin"))
+        protoc = "protoc.exe" if self.settings.os == "Windows" else "protoc"
+        self.env_info.protobuf_BUILD_PROTOC_BINARIES = os.path.normpath(os.path.join(self.package_folder, "bin", protoc))
+
         self.cpp_info.libs = tools.collect_libs(self)
 
         if self.settings.os == "Linux":
