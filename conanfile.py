@@ -57,7 +57,6 @@ class ProtobufConan(ConanFile):
         cmake = CMake(self, set_cmake_flags=True)
         cmake.definitions["protobuf_BUILD_TESTS"] = False
         cmake.definitions["protobuf_WITH_ZLIB"] = self.options.with_zlib
-        #cmake.definitions["protobuf_BUILD_PROTOC_BINARIES"] = not self.options.lite
         cmake.definitions["protobuf_BUILD_PROTOC_BINARIES"] = True
         cmake.definitions["protobuf_BUILD_PROTOBUF_LITE"] = self.options.lite
         if self.settings.compiler == "Visual Studio":
