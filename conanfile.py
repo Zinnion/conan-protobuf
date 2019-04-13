@@ -72,10 +72,6 @@ class ProtobufConan(ConanFile):
         self.copy("LICENSE", dst="licenses", src=self._source_subfolder)
         cmake = self._configure_cmake()
         cmake.install()
-        #cmake_dir = os.path.join(self.package_folder, "cmake") if self.settings.os == "Windows" \
-        #            else os.path.join(self.package_folder, "lib", "cmake", "protoc")
-        #cmake_target = os.path.join(cmake_dir, "protobuf-config-version.cmake")
-        #tools.replace_in_file(cmake_target, "# if the installed", "return() #")
 
     def package_info(self):
         self.env_info.PATH.append(os.path.join(self.package_folder, "bin"))
