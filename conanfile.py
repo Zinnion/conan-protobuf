@@ -75,8 +75,8 @@ class ProtobufConan(ConanFile):
 
     def package_info(self):
         self.env_info.PATH.append(os.path.join(self.package_folder, "bin"))
-        #protoc = "protoc.exe" if self.settings.os == "Windows" else "protoc"
-        #self.env_info.protobuf_BUILD_PROTOC_BINARIES = os.path.normpath(os.path.join(self.package_folder, "bin", protoc))
+        protoc = "protoc.exe" if self.settings.os == "Windows" else "protoc"
+        self.env_info.protobuf_BUILD_PROTOC_BINARIES = os.path.normpath(os.path.join(self.package_folder, "bin", protoc))
         self.cpp_info.libs = tools.collect_libs(self)
 
         if self.settings.os == "Linux":
