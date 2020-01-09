@@ -25,10 +25,10 @@ class ProtobufConan(ConanFile):
                "with_zlib": [True, False],
                "fPIC": [True, False],
                "lite": [True, False]}
-    default_options = {"with_zlib": False,
+    default_options = {"with_zlib": True,
                        "shared": False,
                        "fPIC": True,
-                       "lite": False}
+                       "lite": True}
     _source_subfolder = "source_subfolder"
     _build_subfolder = "build_subfolder"
 
